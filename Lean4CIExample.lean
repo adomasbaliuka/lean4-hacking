@@ -1,2 +1,0 @@
-import Lean4CIExample.ExampleSubdir.ExampleInsideSubdir
-import Lean4CIExample.TrivialLemmasExample

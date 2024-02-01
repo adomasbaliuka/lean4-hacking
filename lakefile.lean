@@ -1,7 +1,7 @@
 import Lake
 open Lake DSL
 
-package lean4_CI_example {
+package «lean4-hacking» {
   -- add package configuration options here
 }
 
@@ -9,6 +9,6 @@ require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
 
 @[default_target]
-lean_lib «Lean4CIExample» {
+lean_lib Lean4Hacking {
   -- add any library configuration options here
 }
