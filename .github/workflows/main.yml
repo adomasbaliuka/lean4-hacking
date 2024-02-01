@@ -25,4 +25,4 @@ jobs:
         run: ~/.elan/bin/lake -Kenv=dev exe cache get
 
       - name: Build project
-        run: ~/.elan/bin/lake -Kenv=dev build Lean4CIExample
+        run: ~/.elan/bin/lake -Kenv=dev build Lean4Hacking

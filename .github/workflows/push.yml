@@ -44,8 +44,8 @@ jobs:
       - name: Install elan
         run: curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain leanprover/lean4:4.0.0
 
-      # Lean4CIExample.lean should import all the files.
-      - name: update Lean4CIExample.lean
+      # Lean4Hacking.lean should import all the files.
+      - name: update Lean4Hacking.lean
         run: |
           find MIL -name "*.lean" | LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > MIL.lean
 
@@ -53,7 +53,7 @@ jobs:
         run: ~/.elan/bin/lake -Kenv=dev exe cache get
 
       - name: Build project
-        run: ~/.elan/bin/lake -Kenv=dev build Lean4CIExample
+        run: ~/.elan/bin/lake -Kenv=dev build Lean4Hacking
 
       - name: check that all files are imported
         run: git diff --exit-code
