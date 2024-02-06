@@ -47,7 +47,7 @@ jobs:
       # Lean4Hacking.lean should import all the files.
       - name: update Lean4Hacking.lean
         run: |
-          find MIL -name "*.lean" | LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > MIL.lean
+          find Lean4Hacking -name "*.lean" | LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > Lean4Hacking.lean
 
       - name: Get cache
         run: ~/.elan/bin/lake -Kenv=dev exe cache get
@@ -57,3 +57,17 @@ jobs:
 
       - name: check that all files are imported
         run: git diff --exit-code
+
+      - name: check environments using lean4checker
+        id: lean4checker
+        run: |
+          git clone https://github.com/leanprover/lean4checker
+          cd lean4checker
+          git checkout toolchain/v4.5.0-rc1
+          # Now that the git hash is embedded in each olean,
+          # we need to compile lean4checker on the same toolchain
+          cp ../lean-toolchain .
+          lake build
+          ./test.sh
+          cd ..
+          lake env lean4checker/.lake/build/bin/lean4checker
