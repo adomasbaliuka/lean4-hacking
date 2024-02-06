@@ -68,7 +68,7 @@ jobs:
           # we need to compile lean4checker on the same toolchain
           cp ../lean-toolchain .
           ~/.elan/bin/lake build
-          alias lake="~/.elan/bin/lake"
-          source ./test.sh
+          alias lake="~/.elan/bin/lake"; export lake
+          ./test.sh
           cd ..
           ~/.elan/bin/lake env lean4checker/.lake/build/bin/lean4checker
