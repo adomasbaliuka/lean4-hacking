@@ -67,7 +67,7 @@ jobs:
           # Now that the git hash is embedded in each olean,
           # we need to compile lean4checker on the same toolchain
           cp ../lean-toolchain .
-          lake build
+          ~/.elan/bin/lake build
           ./test.sh
           cd ..
-          lake env lean4checker/.lake/build/bin/lean4checker
+          ~/.elan/bin/lake env lean4checker/.lake/build/bin/lean4checker
