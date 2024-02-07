@@ -48,7 +48,9 @@ jobs:
       - name: update Lean4Hacking.lean
         run: |
           find Lean4Hacking -name "*.lean" | LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > Lean4Hacking.lean
+
       - name: Remove some files (I don't know why)
+        run: |
           rm -rf .lake/packages/proofwidgets/.lake/build/lib
           rm -rf .lake/packages/proofwidgets/.lake/build/ir
 
