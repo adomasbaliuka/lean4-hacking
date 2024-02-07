@@ -75,4 +75,8 @@ jobs:
           # Remove proofwidgets because it uses oleans built on another system, which lean4checker rejects
           rm -rf .lake/packages/proofwidgets/.lake/build/lib
           rm -rf .lake/packages/proofwidgets/.lake/build/ir
+
+          xxd ./.lake/build/lib/Mathlib.olean | head -5 
+          xxd ./lean4checker/.lake/build/lib/Lean4Checker.olean | head -5
+
           ~/.elan/bin/lake env lean4checker/.lake/build/bin/lean4checker
