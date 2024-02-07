@@ -49,12 +49,15 @@ jobs:
         run: |
           find Lean4Hacking -name "*.lean" | LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > Lean4Hacking.lean
 
-      - name: Remove some files (I don't know why)
+      - name: Build cache (downloads some stuff)
+        run: ~/.elan/bin/lake -Kenv=dev build cache
+
+      - name: Remove some files that lean4checker would reject
         run: |
           rm -rf .lake/packages/proofwidgets/.lake/build/lib
           rm -rf .lake/packages/proofwidgets/.lake/build/ir
 
-      - name: Get cache
+      - name: Get cache (gets good versions of deleted files?!)
         run: ~/.elan/bin/lake -Kenv=dev exe cache get
 
       - name: Build project
