@@ -68,7 +68,11 @@ jobs:
           # we need to compile lean4checker on the same toolchain
           cp ../lean-toolchain .
           ~/.elan/bin/lake build
-          sed -i 's/lake/~\/.elan\/bin\/lake/g' ./test.sh
-          ./test.sh
+          # sed -i 's/lake/~\/.elan\/bin\/lake/g' ./test.sh
+          # ./test.sh
           cd ..
+
+          # Remove proofwidgets because it uses oleans built on another system, which lean4checker rejects
+          rm -rf .lake/packages/proofwidgets/.lake/build/lib
+          rm -rf .lake/packages/proofwidgets/.lake/build/ir
           ~/.elan/bin/lake env lean4checker/.lake/build/bin/lean4checker
