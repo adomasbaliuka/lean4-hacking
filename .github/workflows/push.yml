@@ -48,6 +48,9 @@ jobs:
       - name: update Lean4Hacking.lean
         run: |
           find Lean4Hacking -name "*.lean" | LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > Lean4Hacking.lean
+      - name: Remove some files (I don't know why)
+          rm -rf .lake/packages/proofwidgets/.lake/build/lib
+          rm -rf .lake/packages/proofwidgets/.lake/build/ir
 
       - name: Get cache
         run: ~/.elan/bin/lake -Kenv=dev exe cache get
@@ -71,10 +74,6 @@ jobs:
           # sed -i 's/lake/~\/.elan\/bin\/lake/g' ./test.sh
           # ./test.sh
           cd ..
-
-          # Remove proofwidgets because it uses oleans built on another system, which lean4checker rejects
-          rm -rf .lake/packages/proofwidgets/.lake/build/lib
-          rm -rf .lake/packages/proofwidgets/.lake/build/ir
 
           xxd .lake/packages/mathlib/.lake/build/lib/Mathlib.olean | head -5
           xxd ./lean4checker/.lake/build/lib/Lean4Checker.olean | head -5
