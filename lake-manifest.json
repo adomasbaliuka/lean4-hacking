@@ -64,5 +64,5 @@
    "inputRev": null,
    "inherited": false,
    "configFile": "lakefile.lean"}],
- "name": "lean4_CI_example",
+ "name": "«lean4-hacking»",
  "lakeDir": ".lake"}
