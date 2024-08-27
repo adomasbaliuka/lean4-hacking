@@ -1,0 +1,46 @@
+# Notes on ways to "prove" `False`
+
+These notes try to list possible pitfalls that the CI has to catch and try to document how this is done.
+
+## Axioms
+
+A user might define any axioms they please, including inconsistent ones. The CI must check what axioms the definition depends on and reject if there are any non-standard ones.
+
+
+### `Lean.ofReduceBool`
+
+is a language-defined axiom that comes with definitions that trust the compiler (as opposed to only the kernel).
+One should expect it to be possible to prove `False` when this axiom is allowed.
+An [example](https://leanprover.zulipchat.com/#narrow/stream/270676-lean4/topic/.E2.9C.94.20.23eval.20optimization.20bug.3F/near/441368912) (that has since been fixed):
+```lean
+def a := (123456789012345678901).toUInt64        -- 12776324570088369205
+def b := (123456789012345678901).toUInt64.toNat  -- 123456789012345678901
+
+theorem a_eq : a = 12776324570088369205 := rfl
+
+theorem b_eq : b = 123456789012345678901 := by native_decide
+
+theorem a_eq_b : a.toNat = b := rfl
+
+theorem a_neq_b : a.toNat ≠ b := by simp [a_eq, b_eq]
+
+theorem false : False := a_neq_b a_eq_b
+
+theorem flt (a b c n : Nat) : (a + 1) ^ (n + 3) + (b + 1) ^ (n + 3) ≠ (c + 1) ^ (n + 3) :=
+  false.elim
+```
+
+TODO decide if game should allow this axiom
+
+## Metaprogramming ("macros")
+
+Metaprogramming constructs (parsers, macros, elaborators) can be important from other files and could arbitrarily change the meaning of any code. Not sure yet how to rule this out.
+
+## Environment hacking
+
+There are ways to add definitions to the environment without having the kernel check them.
+[Lean4checker](https://github.com/leanprover/lean4checker) should rule this out.
+External checkers (which are planned to be used here) should also rule this out.
+
+
+## ...
