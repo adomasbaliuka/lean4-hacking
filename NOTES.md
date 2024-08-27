@@ -50,6 +50,9 @@ theorem contradiction : False := nomatch T1.trans T2
 
 not sure how to rule this out. TODO
 
+This now depends on the axiom `Lean.trustCompiler`, so I guess it would be ruled out.
+Maybe there are other examples that would not be.
+
 ## Metaprogramming ("macros")
 
 Metaprogramming constructs (parsers, macros, elaborators) can be important from other files and could arbitrarily change the meaning of any code. Not sure yet how to rule this out.
