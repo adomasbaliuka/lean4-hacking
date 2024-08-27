@@ -20,6 +20,7 @@ To win the game,
 - Feel free to **look** at the CI scripts and tools to get ideas what might work.
 - Do your mischief in `Lean4Hacking/ProofOfFalse.lean`!
 - **You win by submitting a PR that passes CI** where `Lean4Hacking/StatementOfFalse.lean` still contains the line `lemma statement_of_false : False := by` and the line is run.
+- Do not break the law (e.g., no "hacking" of any computers or networks. The only allowed actions are writing Lean code and submitting a PR!)
 
 **Please keep the number of commits reasonable!**
 
@@ -31,3 +32,5 @@ Have fun!
 TODO
 - Axioms
 - Macros (e.g. redefining `False`)
+- Environment hacking
+- `Lean.ofReduceBool`
