@@ -61,7 +61,10 @@ Metaprogramming constructs (parsers, macros, elaborators) can be important from 
 
 There are ways to add definitions to the environment without having the kernel check them.
 [Lean4checker](https://github.com/leanprover/lean4checker) should rule this out.
+
 External checkers (which are planned to be used here) should also rule this out.
 
 
 ## ...
+
+- https://github.com/leanprover/lean4/issues/188
