@@ -1,6 +1,7 @@
 # Notes on ways to "prove" `False`
 
 These notes try to list possible pitfalls that the CI has to catch and try to document how this is done.
+Some of the options how this might happen could be relevant for [this prediction market](https://manifold.markets/tfae/is-the-lean-kernel-unsound) so it's good to keep track of.
 
 ## Axioms
 
