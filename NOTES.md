@@ -32,6 +32,24 @@ theorem flt (a b c n : Nat) : (a + 1) ^ (n + 3) + (b + 1) ^ (n + 3) ≠ (c + 1) 
 
 TODO decide if game should allow this axiom
 
+## "Real world leakage"
+
+Example from [Zulip](https://leanprover.zulipchat.com/#narrow/stream/270676-lean4/topic/soundness.20bug.3A.20native_decide.20leakage/near/395967589)
+
+```lean
+def foo : Bool :=
+  match IO.getRandomBytes 1 () with
+  | .ok bs _ => bs[0]! >= 128
+  | _ => false
+theorem T1 : false = Lean.reduceBool foo := rfl
+theorem T2 : Lean.reduceBool foo = true := rfl
+theorem contradiction : False := nomatch T1.trans T2
+#print axioms contradiction
+-- 'contradiction' does not depend on any axioms
+```
+
+not sure how to rule this out. TODO
+
 ## Metaprogramming ("macros")
 
 Metaprogramming constructs (parsers, macros, elaborators) can be important from other files and could arbitrarily change the meaning of any code. Not sure yet how to rule this out.
