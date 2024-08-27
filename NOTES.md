@@ -53,6 +53,7 @@ not sure how to rule this out. TODO
 
 This now depends on the axiom `Lean.trustCompiler`, so I guess it would be ruled out.
 Maybe there are other examples that would not be.
+See also [PR to define RealWorld as opaque](https://github.com/leanprover/lean4/pull/2656).
 
 ## Metaprogramming ("macros")
 
